@@ -3,7 +3,7 @@ name: Purge jsDelivr cache
 on:
   push:
     paths:
-      - 'Sites.txt'  # Срабатывает только при изменении этого файла
+      - 'Sites.yaml'  # Срабатывает только при изменении этого файла
     branches:
       - main         # Или ваша основная ветка
 
