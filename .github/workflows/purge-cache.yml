@@ -1,12 +1,12 @@
 name: Purge jsDelivr cache
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:   # <-- ДОБАВЬТЕ ЭТУ СТРОКУ
   push:
     paths:
-      - 'Sites.yaml'  # Срабатывает только при изменении этого файла
+      - 'Sites.yaml'
     branches:
-      - main         # Или ваша основная ветка
+      - main
 
 jobs:
   purge:
