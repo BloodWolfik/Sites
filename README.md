@@ -18,7 +18,7 @@ rule-providers:
     type: http
     behavior: domain
     url: "https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/Sites.txt"
-    path: ./ruleset/Sites.txt
+    path: ./ruleset/Sites.yaml
     interval: 86400
 ```
 
