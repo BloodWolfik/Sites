@@ -13,4 +13,4 @@ jobs:
     steps:
       - name: Purge jsDelivr cache
         run: |
-          curl -X GET "https://purge.jsdelivr.net/gh/BloodWolfik/Sites@main/Sites.txt"
+          curl -X GET "https://purge.jsdelivr.net/gh/BloodWolfik/Sites@main/Sites.yaml"
