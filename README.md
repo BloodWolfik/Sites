@@ -14,11 +14,11 @@
 
 ```yaml
 rule-providers:
-  torrent:
+  Site:
     type: http
     behavior: domain
     url: "https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/Sites.txt"
-    path: ./ruleset/torrent.yaml
+    path: ./ruleset/Sites.txt
     interval: 86400
 ```
 
@@ -28,4 +28,4 @@ rule-providers:
 
 ```yaml
 rules:
-  - RULE-SET,torrent,PROXY
+  - RULE-SET,Site,PROXY
