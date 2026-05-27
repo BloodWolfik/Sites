@@ -1,0 +1,16 @@
+name: Purge jsDelivr cache
+
+on:
+  push:
+    paths:
+      - 'Sites.txt'  # Срабатывает только при изменении этого файла
+    branches:
+      - main         # Или ваша основная ветка
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Purge jsDelivr cache
+        run: |
+          curl -X GET "https://purge.jsdelivr.net/gh/BloodWolfik/Sites@main/Sites.txt"
