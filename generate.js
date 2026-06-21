@@ -2,14 +2,13 @@ const fs = require('fs');
 const path = require('path');
 
 // ============================================================
-// НАСТРОЙКИ
+// НАСТРОЙКИ — ПРОВЕРЬТЕ ЭТИ ПАРАМЕТРЫ!
 // ============================================================
-const REPO_OWNER = 'BloodWolfik';        // Ваш логин
-const REPO_NAME = 'Sites';               // Название репозитория
-const BRANCH = 'main';                   // Ветка
-const ICONS_PATH = 'icons';              // Папка с иконками
+const REPO_OWNER = 'BloodWolfik';
+const REPO_NAME = 'Sites';
+const BRANCH = 'main';
+const ICONS_PATH = 'icons';
 
-// Разрешённые расширения
 const ALLOWED_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.ico'];
 
 // ============================================================
@@ -17,17 +16,13 @@ const ALLOWED_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.
 // ============================================================
 function generatePage() {
     console.log('📂 Читаем папку с иконками...');
-    
-    // Проверяем, существует ли папка
+
     if (!fs.existsSync(ICONS_PATH)) {
         console.error(`❌ Папка "${ICONS_PATH}" не найдена!`);
         process.exit(1);
     }
 
-    // Получаем список файлов
     const files = fs.readdirSync(ICONS_PATH);
-    
-    // Фильтруем только изображения
     const iconFiles = files.filter(file => {
         const ext = path.extname(file).toLowerCase();
         return ALLOWED_EXTENSIONS.includes(ext);
@@ -40,9 +35,10 @@ function generatePage() {
 
     console.log(`✅ Найдено ${iconFiles.length} иконок`);
 
-    // Формируем данные для каждой иконки
+    // ФОРМИРУЕМ ПРАВИЛЬНЫЕ ССЫЛКИ
     const icons = iconFiles.map(file => {
         const name = path.parse(file).name;
+        // ПРАВИЛЬНЫЙ ПУТЬ: просто имя файла, без icons/
         const filePath = `${ICONS_PATH}/${file}`;
         return {
             name,
@@ -51,11 +47,11 @@ function generatePage() {
         };
     });
 
-    // ============================================================
-    // ГЕНЕРИРУЕМ HTML
-    // ============================================================
     console.log('🔄 Генерируем HTML...');
 
+    // ============================================================
+    // HTML ШАБЛОН
+    // ============================================================
     let html = `<!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -271,12 +267,8 @@ function generatePage() {
         const searchInput = document.getElementById('searchInput');
         const countDisplay = document.getElementById('countDisplay');
         
-        // Все иконки уже вшиты в HTML, но нам нужен массив для поиска
         const allIcons = ${JSON.stringify(icons)};
         
-        // ============================================================
-        // ПОИСК
-        // ============================================================
         function filterIcons() {
             const query = searchInput.value.toLowerCase().trim();
             const cards = gallery.querySelectorAll('.icon-card');
@@ -289,12 +281,9 @@ function generatePage() {
                 if (match) visibleCount++;
             });
             
-            countDisplay.textContent = visibleCount;
+            countDisplay.textContent = visibleCount || allIcons.length;
         }
         
-        // ============================================================
-        // КОПИРОВАНИЕ
-        // ============================================================
         function copyToClipboard(text, label) {
             navigator.clipboard.writeText(text).then(() => {
                 showToast(\`✅ \${label} — скопировано!\`, 'success');
@@ -313,9 +302,6 @@ function generatePage() {
             });
         }
         
-        // ============================================================
-        // TOAST
-        // ============================================================
         let toastTimeout;
         function showToast(message, type = 'success') {
             toast.textContent = message;
@@ -325,9 +311,6 @@ function generatePage() {
             toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500);
         }
         
-        // ============================================================
-        // ОБРАБОТЧИКИ КНОПОК
-        // ============================================================
         document.querySelectorAll('.link-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -338,7 +321,6 @@ function generatePage() {
             });
         });
         
-        // Клик по карточке — копируем RAW
         document.querySelectorAll('.icon-card').forEach(card => {
             card.addEventListener('click', function() {
                 const rawBtn = this.querySelector('.link-btn.raw');
@@ -353,13 +335,9 @@ function generatePage() {
 </body>
 </html>`;
 
-    // Сохраняем index.html
     fs.writeFileSync('index.html', html);
     console.log('✅ Файл index.html успешно создан!');
     console.log(`📊 Всего иконок: ${icons.length}`);
 }
 
-// ============================================================
-// ЗАПУСК
-// ============================================================
 generatePage();
