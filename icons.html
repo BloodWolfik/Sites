@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Иконки для Clash — RAW + CDN</title>
+    <style>
+        /* ===== ПЕРЕМЕННЫЕ ДЛЯ ТЕМ ===== */
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #161b22;
+            --bg-input: #161b22;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-muted: #484f58;
+            --border-color: #30363d;
+            --border-hover: #58a6ff;
+            --badge-bg: #238636;
+            --badge-text: #fff;
+            --shadow: rgba(0,0,0,0.5);
+            --toast-bg: #161b22;
+            --img-bg: #0d1117;
+            --error-color: #f85149;
+            --clash-accent: #7c5cfc;
+            --cdn-bg: #1f2937;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f6f8fa;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-input: #ffffff;
+            --text-primary: #24292f;
+            --text-secondary: #57606a;
+            --text-muted: #8b949e;
+            --border-color: #d0d7de;
+            --border-hover: #0969da;
+            --badge-bg: #2da44e;
+            --badge-text: #ffffff;
+            --shadow: rgba(0,0,0,0.15);
+            --toast-bg: #ffffff;
+            --img-bg: #f6f8fa;
+            --error-color: #cf222e;
+            --clash-accent: #6e4bda;
+            --cdn-bg: #e9ecf0;
+        }
+
+        /* ===== ОБЩИЕ ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 2rem;
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ===== ШАПКА ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        h1 {
+            font-weight: 600;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        h1 small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+        .theme-toggle:hover {
+            border-color: var(--border-hover);
+            transform: scale(1.02);
+        }
+
+        .search-box {
+            max-width: 400px;
+            width: 100%;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+        .search-box input:focus {
+            border-color: var(--border-hover);
+        }
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .stats {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        .stats span {
+            background: var(--bg-secondary);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* ===== ГАЛЕРЕЯ ===== */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== КАРТОЧКА ===== */
+        .icon-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, background 0.3s;
+        }
+        .icon-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px var(--shadow);
+            border-color: var(--clash-accent);
+        }
+        .icon-card img {
+            width: 100%;
+            max-height: 140px;
+            object-fit: contain;
+            background: var(--img-bg);
+            border-radius: 8px;
+            padding: 8px;
+        }
+        .icon-card .name {
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            word-break: break-all;
+            font-weight: 500;
+        }
+
+        /* ===== КНОПКИ ССЫЛОК ===== */
+        .link-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .link-btn {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            border: none;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .link-btn:hover {
+            opacity: 0.85;
+            transform: scale(0.97);
+        }
+        .link-btn.raw {
+            background: var(--badge-bg);
+            color: #fff;
+        }
+        .link-btn.cdn {
+            background: var(--clash-accent);
+            color: #fff;
+        }
+        .link-btn.copy-all {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            font-size: 0.65rem;
+        }
+
+        .badge-type {
+            display: inline-block;
+            margin-top: 0.3rem;
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+            padding: 0.1rem 0.6rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--toast-bg);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            opacity: 0;
+            transition: all 0.4s ease;
+            pointer-events: none;
+            z-index: 1000;
+            box-shadow: 0 8px 30px var(--shadow);
+            max-width: 90%;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast.success { border-color: var(--badge-bg); }
+        .toast.error { border-color: var(--error-color); }
+
+        .loader {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+            grid-column: 1 / -1;
+        }
+        .loader::after {
+            content: '⏳';
+            display: block;
+            font-size: 2rem;
+            margin-top: 0.5rem;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .error {
+            color: var(--error-color);
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 2rem;
+        }
+        .error button {
+            background: var(--clash-accent);
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        .error button:hover { opacity: 0.9; }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+        .footer-note .clash-tip {
+            color: var(--clash-accent);
+            font-weight: 500;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            .header { flex-direction: column; align-items: stretch; }
+            .header-controls { justify-content: space-between; }
+            .search-box { max-width: 100%; }
+            .gallery { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+            .icon-card img { max-height: 100px; }
+            .link-btn { font-size: 0.6rem; padding: 0.2rem 0.6rem; }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px; height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ШАПКА ===== -->
+    <div class="header">
+        <h1>
+            🚀 Иконки для Clash
+            <small>RAW + CDN</small>
+        </h1>
+        <div class="header-controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Поиск..." oninput="filterIcons()">
+            </div>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+                <span class="icon" id="themeIcon">🌙</span>
+                <span id="themeLabel">Тёмная</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="stats">
+        <span>📦 <span id="countDisplay">0</span> иконок</span>
+    </div>
+
+    <div class="gallery" id="gallery">
+        <div class="loader">Загрузка иконок...</div>
+    </div>
+
+    <div id="toast" class="toast">✅ Скопировано!</div>
+
+    <div class="footer-note">
+        ⚡ Нажмите <strong>RAW</strong> или <strong>CDN</strong> чтобы скопировать ссылку для Clash
+        <span class="clash-tip">(вставьте в поле «URL иконки»)</span>
+    </div>
+
+    <script>
+        // ============================================================
+        // НАСТРОЙКИ
+        // ============================================================
+        const REPO_OWNER = 'BloodWolfik';
+        const REPO_NAME = 'Sites';
+        const BRANCH = 'main';
+        const ICONS_PATH = 'icons';
+        const ALLOWED_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.ico'];
+
+        // ============================================================
+        // СОСТОЯНИЕ
+        // ============================================================
+        const gallery = document.getElementById('gallery');
+        const toast = document.getElementById('toast');
+        const countDisplay = document.getElementById('countDisplay');
+        const searchInput = document.getElementById('searchInput');
+
+        let allIcons = [];
+
+        // ============================================================
+        // ФОРМИРОВАНИЕ ССЫЛОК
+        // ============================================================
+        function buildUrls(filePath) {
+            const raw = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${filePath}`;
+            // CDN через jsDelivr
+            const cdn = `https://cdn.jsdelivr.net/gh/${REPO_OWNER}/${REPO_NAME}@${BRANCH}/${filePath}`;
+            return { raw, cdn };
+        }
+
+        // ============================================================
+        // ЗАГРУЗКА
+        // ============================================================
+        async function loadIconsFromGitHub() {
+            try {
+                const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${ICONS_PATH}?ref=${BRANCH}`;
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error(`Ошибка API: ${response.status} ${response.statusText}`);
+                }
+                const files = await response.json();
+
+                const imageFiles = files.filter(file => {
+                    if (file.type !== 'file') return false;
+                    const ext = '.' + file.name.split('.').pop().toLowerCase();
+                    return ALLOWED_EXTENSIONS.includes(ext);
+                });
+
+                if (imageFiles.length === 0) {
+                    gallery.innerHTML = `<div class="error">😕 В папке "${ICONS_PATH}" нет изображений</div>`;
+                    return;
+                }
+
+                allIcons = imageFiles.map(file => {
+                    const name = file.name.replace(/\.[^.]+$/, '');
+                    const urls = buildUrls(file.path);
+                    return {
+                        name,
+                        rawUrl: urls.raw,
+                        cdnUrl: urls.cdn,
+                        file
+                    };
+                });
+
+                renderIcons(allIcons);
+
+            } catch (error) {
+                console.error('Ошибка загрузки:', error);
+                gallery.innerHTML = `
+                    <div class="error">
+                        ❌ Не удалось загрузить иконки<br>
+                        <small style="color: var(--text-muted);">${error.message}</small>
+                        <br>
+                        <button onclick="loadIconsFromGitHub()">Повторить</button>
+                    </div>
+                `;
+            }
+        }
+
+        // ============================================================
+        // ОТРИСОВКА
+        // ============================================================
+        function renderIcons(icons) {
+            gallery.innerHTML = '';
+            if (icons.length === 0) {
+                gallery.innerHTML = `
+                    <div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:3rem;">
+                        😕 Ничего не найдено
+                    </div>
+                `;
+                countDisplay.textContent = '0';
+                return;
+            }
+
+            icons.forEach(icon => {
+                const card = document.createElement('div');
+                card.className = 'icon-card';
+
+                card.innerHTML = `
+                    <img src="${icon.rawUrl}" alt="${icon.name}" loading="lazy" 
+                         onerror="this.style.display='none'">
+                    <div class="name">${icon.name}</div>
+                    <div class="link-buttons">
+                        <button class="link-btn raw" data-url="${icon.rawUrl}" data-name="${icon.name}">⬇ RAW</button>
+                        <button class="link-btn cdn" data-url="${icon.cdnUrl}" data-name="${icon.name}">🌐 CDN</button>
+                    </div>
+                    <div class="badge-type">⚡ Clash</div>
+                `;
+
+                // Вешаем обработчики на кнопки
+                card.querySelectorAll('.link-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation(); // чтобы не сработал клик по карточке
+                        const url = btn.dataset.url;
+                        const name = btn.dataset.name;
+                        const type = btn.classList.contains('cdn') ? 'CDN' : 'RAW';
+                        copyToClipboard(url, `${name} (${type})`);
+                    });
+                });
+
+                // Клик по самой карточке — копируем RAW (для удобства)
+                card.addEventListener('click', () => {
+                    copyToClipboard(icon.rawUrl, `${icon.name} (RAW)`);
+                });
+
+                gallery.appendChild(card);
+            });
+
+            countDisplay.textContent = icons.length;
+        }
+
+        // ============================================================
+        // КОПИРОВАНИЕ
+        // ============================================================
+        function copyToClipboard(text, label) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(`✅ ${label} — скопировано!`, 'success');
+            }).catch(() => {
+                // fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast(`✅ ${label} — скопировано!`, 'success');
+                } catch {
+                    showToast(`❌ Не удалось скопировать`, 'error');
+                }
+                document.body.removeChild(textarea);
+            });
+        }
+
+        // ============================================================
+        // ПОИСК
+        // ============================================================
+        function filterIcons() {
+            const query = searchInput.value.toLowerCase().trim();
+            if (!query) {
+                renderIcons(allIcons);
+                return;
+            }
+            const filtered = allIcons.filter(icon =>
+                icon.name.toLowerCase().includes(query)
+            );
+            renderIcons(filtered);
+        }
+
+        // ============================================================
+        // TOAST
+        // ============================================================
+        let toastTimeout;
+        function showToast(message, type = 'success') {
+            toast.textContent = message;
+            toast.className = `toast ${type}`;
+            clearTimeout(toastTimeout);
+            requestAnimationFrame(() => toast.classList.add('show'));
+            toastTimeout = setTimeout(() => toast.classList.remove('show'), 2200);
+        }
+
+        // ============================================================
+        // ТЕМА
+        // ============================================================
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? '' : 'light';
+            html.setAttribute('data-theme', next);
+
+            const icon = document.getElementById('themeIcon');
+            const label = document.getElementById('themeLabel');
+            if (next === 'light') {
+                icon.textContent = '☀️';
+                label.textContent = 'Светлая';
+                localStorage.setItem('theme', 'light');
+            } else {
+                icon.textContent = '🌙';
+                label.textContent = 'Тёмная';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        function loadTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.getElementById('themeIcon').textContent = '☀️';
+                document.getElementById('themeLabel').textContent = 'Светлая';
+            } else {
+                document.documentElement.setAttribute('data-theme', '');
+                document.getElementById('themeIcon').textContent = '🌙';
+                document.getElementById('themeLabel').textContent = 'Тёмная';
+            }
+        }
+
+        // ============================================================
+        // ЗАПУСК
+        // ============================================================
+        loadTheme();
+        loadIconsFromGitHub();
+    </script>
+</body>
+</html>
