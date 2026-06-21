@@ -214,12 +214,6 @@
             background: var(--clash-accent);
             color: #fff;
         }
-        .link-btn.copy-all {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            font-size: 0.65rem;
-        }
 
         .badge-type {
             display: inline-block;
@@ -365,12 +359,12 @@
 
     <script>
         // ============================================================
-        // НАСТРОЙКИ
+        // НАСТРОЙКИ — ИЗМЕНИТЕ ПОД СЕБЯ
         // ============================================================
-        const REPO_OWNER = 'BloodWolfik';
-        const REPO_NAME = 'Sites';
-        const BRANCH = 'main';
-        const ICONS_PATH = 'icons';
+        const REPO_OWNER = 'BloodWolfik';        // ← Ваш логин на GitHub
+        const REPO_NAME = 'Sites';               // ← Название репозитория
+        const BRANCH = 'main';                   // ← Ветка (main или master)
+        const ICONS_PATH = 'icons';              // ← Папка с иконками
         const ALLOWED_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.ico'];
 
         // ============================================================
@@ -472,10 +466,10 @@
                     <div class="badge-type">⚡ Clash</div>
                 `;
 
-                // Вешаем обработчики на кнопки
+                // Обработчики на кнопки
                 card.querySelectorAll('.link-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
-                        e.stopPropagation(); // чтобы не сработал клик по карточке
+                        e.stopPropagation();
                         const url = btn.dataset.url;
                         const name = btn.dataset.name;
                         const type = btn.classList.contains('cdn') ? 'CDN' : 'RAW';
@@ -483,7 +477,7 @@
                     });
                 });
 
-                // Клик по самой карточке — копируем RAW (для удобства)
+                // Клик по карточке — копируем RAW
                 card.addEventListener('click', () => {
                     copyToClipboard(icon.rawUrl, `${icon.name} (RAW)`);
                 });
