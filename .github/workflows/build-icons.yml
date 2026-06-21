@@ -1,45 +1,40 @@
 name: 🔄 Автоматическое обновление иконок
 
 on:
-  # Запускается при изменении в папке icons или в скрипте
   push:
     paths:
       - 'icons/**'
       - 'generate.js'
       - 'package.json'
-  
-  # Или по расписанию (раз в день)
   schedule:
     - cron: '0 0 * * *'
-  
-  # Можно запустить вручную из интерфейса GitHub
   workflow_dispatch:
+
+permissions:
+  contents: write  # <-- ВАЖНО! Разрешаем запись
 
 jobs:
   build:
     runs-on: ubuntu-latest
     
     steps:
-      # 1. Клонируем репозиторий
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
-        
-      # 2. Устанавливаем Node.js
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # <-- Добавляем токен
+          
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
           
-      # 3. Устанавливаем зависимости (если нужны)
       - name: 📦 Install dependencies
         run: |
           npm install || echo "Нет зависимостей"
           
-      # 4. Запускаем генерацию HTML
       - name: 🛠️ Generate index.html
         run: node generate.js
         
-      # 5. Коммитим изменения
       - name: 📤 Commit and push
         run: |
           git config user.name "github-actions[bot]"
@@ -47,3 +42,5 @@ jobs:
           git add index.html
           git diff --staged --quiet || git commit -m "🔄 Автоматическое обновление иконок"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # <-- Токен для пуша
