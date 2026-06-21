@@ -7,10 +7,11 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: system-ui, sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
             background: #0d1117;
             color: #c9d1d9;
             padding: 2rem;
+            min-height: 100vh;
         }
         .header {
             display: flex;
@@ -23,6 +24,7 @@
         }
         h1 { font-size: 1.8rem; display: flex; align-items: center; gap: 0.5rem; }
         h1 small { font-size: 0.9rem; font-weight: 400; color: #8b949e; background: #161b22; padding: 0.2rem 0.8rem; border-radius: 20px; border: 1px solid #30363d; }
+        .header-controls { display: flex; align-items: center; gap: 1rem; }
         .search-box input {
             padding: 0.6rem 1rem;
             border-radius: 8px;
@@ -32,11 +34,23 @@
             font-size: 0.95rem;
             outline: none;
             width: 250px;
+            transition: border-color 0.3s;
         }
         .search-box input:focus { border-color: #58a6ff; }
         .search-box input::placeholder { color: #484f58; }
-        .stats { text-align: center; margin-bottom: 1.5rem; color: #8b949e; }
-        .stats span { background: #161b22; padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid #30363d; }
+        
+        .stats {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #8b949e;
+        }
+        .stats span {
+            background: #161b22;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            border: 1px solid #30363d;
+        }
+        
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -102,6 +116,7 @@
             border-radius: 12px;
             border: 1px solid #30363d;
         }
+        
         .toast {
             position: fixed;
             bottom: 2rem;
@@ -121,36 +136,7 @@
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         .toast.success { border-color: #238636; }
         .toast.error { border-color: #f85149; }
-        .loader {
-            text-align: center;
-            padding: 3rem;
-            color: #8b949e;
-            grid-column: 1 / -1;
-        }
-        .loader::after {
-            content: '⏳';
-            display: block;
-            font-size: 2rem;
-            margin-top: 0.5rem;
-            animation: pulse 1s infinite;
-        }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-        .error {
-            color: #f85149;
-            text-align: center;
-            grid-column: 1 / -1;
-            padding: 2rem;
-        }
-        .error button {
-            background: #7c5cfc;
-            color: #fff;
-            border: none;
-            padding: 0.5rem 1.5rem;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 1rem;
-        }
-        .error button:hover { opacity: 0.9; }
+        
         .footer-note {
             text-align: center;
             margin-top: 2.5rem;
@@ -160,6 +146,7 @@
             padding-top: 1.5rem;
         }
         .footer-note .clash-tip { color: #7c5cfc; font-weight: 500; }
+        
         @media (max-width: 600px) {
             body { padding: 1rem; }
             .header { flex-direction: column; align-items: stretch; }
@@ -169,6 +156,7 @@
             .icon-card img { max-height: 100px; }
             .link-btn { font-size: 0.6rem; padding: 0.2rem 0.6rem; }
         }
+        
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #0d1117; }
         ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
@@ -187,11 +175,253 @@
     </div>
 
     <div class="stats">
-        📦 <span id="countDisplay">0</span> иконок
+        📦 <span id="countDisplay">27</span> иконок
     </div>
 
     <div class="gallery" id="gallery">
-        <div class="loader">⏳ Загрузка иконок...</div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/18+v1.svg" alt="18+v1" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">18+v1</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/18+v1.svg" data-name="18+v1">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/18+v1.svg" data-name="18+v1">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/18+v2.svg" alt="18+v2" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">18+v2</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/18+v2.svg" data-name="18+v2">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/18+v2.svg" data-name="18+v2">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v1.svg" alt="ai_v1" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">ai_v1</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v1.svg" data-name="ai_v1">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/ai_v1.svg" data-name="ai_v1">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v2.svg" alt="ai_v2" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">ai_v2</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v2.svg" data-name="ai_v2">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/ai_v2.svg" data-name="ai_v2">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v3.svg" alt="ai_v3" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">ai_v3</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v3.svg" data-name="ai_v3">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/ai_v3.svg" data-name="ai_v3">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v4.svg" alt="ai_v4" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">ai_v4</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v4.svg" data-name="ai_v4">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/ai_v4.svg" data-name="ai_v4">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/akamai_v1.svg" alt="akamai_v1" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">akamai_v1</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/akamai_v1.svg" data-name="akamai_v1">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/akamai_v1.svg" data-name="akamai_v1">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/amazon_v1.svg" alt="amazon_v1" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">amazon_v1</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/amazon_v1.svg" data-name="amazon_v1">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/amazon_v1.svg" data-name="amazon_v1">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/amazon_v2.svg" alt="amazon_v2" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">amazon_v2</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/amazon_v2.svg" data-name="amazon_v2">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/amazon_v2.svg" data-name="amazon_v2">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/cloudflare_v1.svg" alt="cloudflare_v1" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">cloudflare_v1</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/cloudflare_v1.svg" data-name="cloudflare_v1">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/cloudflare_v1.svg" data-name="cloudflare_v1">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/cloudflare_v2.svg" alt="cloudflare_v2" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">cloudflare_v2</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/cloudflare_v2.svg" data-name="cloudflare_v2">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/cloudflare_v2.svg" data-name="cloudflare_v2">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/discord_v1.svg" alt="discord_v1" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">discord_v1</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/discord_v1.svg" data-name="discord_v1">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/discord_v1.svg" data-name="discord_v1">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/discord_v2.svg" alt="discord_v2" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">discord_v2</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/discord_v2.svg" data-name="discord_v2">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/discord_v2.svg" data-name="discord_v2">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/fastly_v1.svg" alt="fastly_v1" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">fastly_v1</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/fastly_v1.svg" data-name="fastly_v1">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/fastly_v1.svg" data-name="fastly_v1">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/lock_v1.svg" alt="lock_v1" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">lock_v1</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/lock_v1.svg" data-name="lock_v1">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/lock_v1.svg" data-name="lock_v1">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/lock_v2.svg" alt="lock_v2" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">lock_v2</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/lock_v2.svg" data-name="lock_v2">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/lock_v2.svg" data-name="lock_v2">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/lock_v3.svg" alt="lock_v3" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">lock_v3</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/lock_v3.svg" data-name="lock_v3">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/lock_v3.svg" data-name="lock_v3">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/telegram_v1.svg" alt="telegram_v1" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">telegram_v1</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/telegram_v1.svg" data-name="telegram_v1">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/telegram_v1.svg" data-name="telegram_v1">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/torrent_v1.svg" alt="torrent_v1" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">torrent_v1</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/torrent_v1.svg" data-name="torrent_v1">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/torrent_v1.svg" data-name="torrent_v1">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/torrent_v2.svg" alt="torrent_v2" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">torrent_v2</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/torrent_v2.svg" data-name="torrent_v2">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/torrent_v2.svg" data-name="torrent_v2">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/torrent_v3.svg" alt="torrent_v3" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">torrent_v3</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/torrent_v3.svg" data-name="torrent_v3">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/torrent_v3.svg" data-name="torrent_v3">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/twitch_v1.svg" alt="twitch_v1" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">twitch_v1</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/twitch_v1.svg" data-name="twitch_v1">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/twitch_v1.svg" data-name="twitch_v1">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/website_v1.svg" alt="website_v1" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">website_v1</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/website_v1.svg" data-name="website_v1">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/website_v1.svg" data-name="website_v1">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v1.svg" alt="youtube_v1" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">youtube_v1</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v1.svg" data-name="youtube_v1">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/youtube_v1.svg" data-name="youtube_v1">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v2.svg" alt="youtube_v2" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">youtube_v2</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v2.svg" data-name="youtube_v2">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/youtube_v2.svg" data-name="youtube_v2">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v3.svg" alt="youtube_v3" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">youtube_v3</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v3.svg" data-name="youtube_v3">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/youtube_v3.svg" data-name="youtube_v3">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
+        <div class="icon-card">
+            <img src="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v4.svg" alt="youtube_v4" loading="lazy" onerror="this.style.display='none'">
+            <div class="name">youtube_v4</div>
+            <div class="link-buttons">
+                <button class="link-btn raw" data-url="https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v4.svg" data-name="youtube_v4">⬇ RAW</button>
+                <button class="link-btn cdn" data-url="https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/youtube_v4.svg" data-name="youtube_v4">🌐 CDN</button>
+            </div>
+            <div class="badge-type">⚡ Clash</div>
+        </div>
     </div>
 
     <div id="toast" class="toast">✅ Скопировано!</div>
@@ -203,200 +433,34 @@
 
     <script>
         // ============================================================
-        // НАСТРОЙКИ — ИЗМЕНИТЕ ПОД СЕБЯ
-        // ============================================================
-        const REPO_OWNER = 'BloodWolfik';
-        const REPO_NAME = 'Sites';
-        const BRANCH = 'main';
-        const ICONS_PATH = 'icons';
-        const ALLOWED_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.ico'];
-        const CACHE_KEY = 'clash_icons_cache';
-        const CACHE_TIMESTAMP_KEY = 'clash_icons_timestamp';
-        const CACHE_DURATION = 30 * 60 * 1000; // 30 минут
-
-        // ============================================================
-        // СОСТОЯНИЕ
+        // ФУНКЦИИ ДЛЯ РАБОТЫ С ГАЛЕРЕЕЙ
         // ============================================================
         const gallery = document.getElementById('gallery');
         const toast = document.getElementById('toast');
-        const countDisplay = document.getElementById('countDisplay');
         const searchInput = document.getElementById('searchInput');
-
-        let allIcons = [];
-
+        const countDisplay = document.getElementById('countDisplay');
+        
+        // Все иконки уже вшиты в HTML, но нам нужен массив для поиска
+        const allIcons = [{"name":"18+v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/18+v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/18+v1.svg"},{"name":"18+v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/18+v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/18+v2.svg"},{"name":"ai_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/ai_v1.svg"},{"name":"ai_v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/ai_v2.svg"},{"name":"ai_v3","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v3.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/ai_v3.svg"},{"name":"ai_v4","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v4.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/ai_v4.svg"},{"name":"akamai_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/akamai_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/akamai_v1.svg"},{"name":"amazon_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/amazon_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/amazon_v1.svg"},{"name":"amazon_v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/amazon_v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/amazon_v2.svg"},{"name":"cloudflare_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/cloudflare_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/cloudflare_v1.svg"},{"name":"cloudflare_v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/cloudflare_v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/cloudflare_v2.svg"},{"name":"discord_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/discord_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/discord_v1.svg"},{"name":"discord_v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/discord_v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/discord_v2.svg"},{"name":"fastly_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/fastly_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/fastly_v1.svg"},{"name":"lock_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/lock_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/lock_v1.svg"},{"name":"lock_v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/lock_v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/lock_v2.svg"},{"name":"lock_v3","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/lock_v3.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/lock_v3.svg"},{"name":"telegram_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/telegram_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/telegram_v1.svg"},{"name":"torrent_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/torrent_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/torrent_v1.svg"},{"name":"torrent_v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/torrent_v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/torrent_v2.svg"},{"name":"torrent_v3","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/torrent_v3.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/torrent_v3.svg"},{"name":"twitch_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/twitch_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/twitch_v1.svg"},{"name":"website_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/website_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/website_v1.svg"},{"name":"youtube_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/youtube_v1.svg"},{"name":"youtube_v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/youtube_v2.svg"},{"name":"youtube_v3","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v3.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/youtube_v3.svg"},{"name":"youtube_v4","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v4.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/youtube_v4.svg"}];
+        
         // ============================================================
-        // РАБОТА С КЕШЕМ
+        // ПОИСК
         // ============================================================
-        function getCachedIcons() {
-            try {
-                const cached = localStorage.getItem(CACHE_KEY);
-                const timestamp = localStorage.getItem(CACHE_TIMESTAMP_KEY);
-                if (!cached || !timestamp) return null;
-                if (Date.now() - parseInt(timestamp) > CACHE_DURATION) {
-                    localStorage.removeItem(CACHE_KEY);
-                    localStorage.removeItem(CACHE_TIMESTAMP_KEY);
-                    return null;
-                }
-                return JSON.parse(cached);
-            } catch {
-                return null;
-            }
-        }
-
-        function saveToCache(icons) {
-            try {
-                localStorage.setItem(CACHE_KEY, JSON.stringify(icons));
-                localStorage.setItem(CACHE_TIMESTAMP_KEY, String(Date.now()));
-            } catch (e) {
-                console.warn('Не удалось сохранить кеш:', e);
-            }
-        }
-
-        // ============================================================
-        // ФОРМИРОВАНИЕ ССЫЛОК
-        // ============================================================
-        function buildUrls(filePath) {
-            const raw = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${filePath}`;
-            const cdn = `https://cdn.jsdelivr.net/gh/${REPO_OWNER}/${REPO_NAME}@${BRANCH}/${filePath}`;
-            return { raw, cdn };
-        }
-
-        // ============================================================
-        // ЗАГРУЗКА С КЕШЕМ
-        // ============================================================
-        async function loadIcons() {
-            // 1. Пытаемся загрузить из кеша
-            const cached = getCachedIcons();
-            if (cached && cached.length > 0) {
-                allIcons = cached;
-                renderIcons(allIcons);
-                // Показываем, что данные из кеша
-                showToast('📦 Иконки загружены из кеша', 'success');
-                // Фоново обновляем, если кеш скоро истечёт
-                const timestamp = parseInt(localStorage.getItem(CACHE_TIMESTAMP_KEY) || '0');
-                if (Date.now() - timestamp > CACHE_DURATION / 2) {
-                    fetchIconsFromGitHub(true); // тихое обновление
-                }
-                return;
-            }
-
-            // 2. Если кеша нет — грузим с GitHub
-            await fetchIconsFromGitHub(false);
-        }
-
-        async function fetchIconsFromGitHub(silent = false) {
-            try {
-                const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${ICONS_PATH}?ref=${BRANCH}`;
-                const response = await fetch(url);
-                
-                if (!response.ok) {
-                    if (response.status === 403) {
-                        // Если лимит исчерпан и кеша нет — показываем ошибку
-                        if (!silent) {
-                            gallery.innerHTML = `
-                                <div class="error">
-                                    ⚠️ Превышен лимит запросов к GitHub API<br>
-                                    <small style="color: #8b949e;">Подождите 15-20 минут или используйте кеш</small>
-                                    <br>
-                                    <button onclick="loadIcons()">Попробовать снова</button>
-                                </div>
-                            `;
-                        }
-                        return;
-                    }
-                    throw new Error(`Ошибка API: ${response.status}`);
-                }
-
-                const files = await response.json();
-
-                const imageFiles = files.filter(file => {
-                    if (file.type !== 'file') return false;
-                    const ext = '.' + file.name.split('.').pop().toLowerCase();
-                    return ALLOWED_EXTENSIONS.includes(ext);
-                });
-
-                if (imageFiles.length === 0) {
-                    gallery.innerHTML = `<div class="error">😕 В папке "${ICONS_PATH}" нет изображений</div>`;
-                    return;
-                }
-
-                allIcons = imageFiles.map(file => {
-                    const name = file.name.replace(/\.[^.]+$/, '');
-                    const urls = buildUrls(file.path);
-                    return { name, raw: urls.raw, cdn: urls.cdn };
-                });
-
-                // Сохраняем в кеш
-                saveToCache(allIcons);
-
-                renderIcons(allIcons);
-                if (!silent) {
-                    showToast('✅ Иконки загружены с GitHub', 'success');
-                }
-
-            } catch (error) {
-                console.error('Ошибка загрузки:', error);
-                if (!silent) {
-                    gallery.innerHTML = `
-                        <div class="error">
-                            ❌ ${error.message}<br>
-                            <button onclick="loadIcons()">Повторить</button>
-                        </div>
-                    `;
-                }
-            }
-        }
-
-        // ============================================================
-        // ОТРИСОВКА
-        // ============================================================
-        function renderIcons(icons) {
-            gallery.innerHTML = '';
-            if (icons.length === 0) {
-                gallery.innerHTML = `
-                    <div style="grid-column:1/-1;text-align:center;color:#8b949e;padding:3rem;">
-                        😕 Ничего не найдено
-                    </div>
-                `;
-                countDisplay.textContent = '0';
-                return;
-            }
-
-            icons.forEach(icon => {
-                const card = document.createElement('div');
-                card.className = 'icon-card';
-
-                card.innerHTML = `
-                    <img src="${icon.raw}" alt="${icon.name}" loading="lazy" 
-                         onerror="this.style.display='none'">
-                    <div class="name">${icon.name}</div>
-                    <div class="link-buttons">
-                        <button class="link-btn raw" data-url="${icon.raw}" data-name="${icon.name}">⬇ RAW</button>
-                        <button class="link-btn cdn" data-url="${icon.cdn}" data-name="${icon.name}">🌐 CDN</button>
-                    </div>
-                    <div class="badge-type">⚡ Clash</div>
-                `;
-
-                card.querySelectorAll('.link-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const url = btn.dataset.url;
-                        const name = btn.dataset.name;
-                        const type = btn.classList.contains('cdn') ? 'CDN' : 'RAW';
-                        copyToClipboard(url, `${name} (${type})`);
-                    });
-                });
-
-                card.addEventListener('click', () => {
-                    copyToClipboard(icon.raw, `${icon.name} (RAW)`);
-                });
-
-                gallery.appendChild(card);
+        function filterIcons() {
+            const query = searchInput.value.toLowerCase().trim();
+            const cards = gallery.querySelectorAll('.icon-card');
+            
+            let visibleCount = 0;
+            cards.forEach((card, index) => {
+                const name = allIcons[index]?.name || '';
+                const match = name.toLowerCase().includes(query);
+                card.style.display = match ? '' : 'none';
+                if (match) visibleCount++;
             });
-
-            countDisplay.textContent = icons.length;
+            
+            countDisplay.textContent = visibleCount;
         }
-
+        
         // ============================================================
         // КОПИРОВАНИЕ
         // ============================================================
@@ -417,17 +481,7 @@
                 document.body.removeChild(textarea);
             });
         }
-
-        // ============================================================
-        // ПОИСК
-        // ============================================================
-        function filterIcons() {
-            const query = searchInput.value.toLowerCase().trim();
-            if (!query) { renderIcons(allIcons); return; }
-            const filtered = allIcons.filter(icon => icon.name.toLowerCase().includes(query));
-            renderIcons(filtered);
-        }
-
+        
         // ============================================================
         // TOAST
         // ============================================================
@@ -437,13 +491,33 @@
             toast.className = `toast ${type}`;
             clearTimeout(toastTimeout);
             requestAnimationFrame(() => toast.classList.add('show'));
-            toastTimeout = setTimeout(() => toast.classList.remove('show'), 2200);
+            toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500);
         }
-
+        
         // ============================================================
-        // ЗАПУСК
+        // ОБРАБОТЧИКИ КНОПОК
         // ============================================================
-        loadIcons();
+        document.querySelectorAll('.link-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const url = btn.dataset.url;
+                const name = btn.dataset.name;
+                const type = btn.classList.contains('cdn') ? 'CDN' : 'RAW';
+                copyToClipboard(url, `${name} (${type})`);
+            });
+        });
+        
+        // Клик по карточке — копируем RAW
+        document.querySelectorAll('.icon-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const rawBtn = this.querySelector('.link-btn.raw');
+                if (rawBtn) {
+                    copyToClipboard(rawBtn.dataset.url, `${rawBtn.dataset.name} (RAW)`);
+                }
+            });
+        });
+        
+        console.log('✅ Иконки загружены! Всего:', allIcons.length);
     </script>
 </body>
 </html>
