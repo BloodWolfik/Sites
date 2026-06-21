@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // ============================================================
-// НАСТРОЙКИ — ПРОВЕРЬТЕ ЭТИ ПАРАМЕТРЫ!
+// НАСТРОЙКИ
 // ============================================================
 const REPO_OWNER = 'BloodWolfik';
 const REPO_NAME = 'Sites';
@@ -35,10 +35,8 @@ function generatePage() {
 
     console.log(`✅ Найдено ${iconFiles.length} иконок`);
 
-    // ФОРМИРУЕМ ПРАВИЛЬНЫЕ ССЫЛКИ
     const icons = iconFiles.map(file => {
         const name = path.parse(file).name;
-        // ПРАВИЛЬНЫЙ ПУТЬ: просто имя файла, без icons/
         const filePath = `${ICONS_PATH}/${file}`;
         return {
             name,
@@ -49,9 +47,6 @@ function generatePage() {
 
     console.log('🔄 Генерируем HTML...');
 
-    // ============================================================
-    // HTML ШАБЛОН
-    // ============================================================
     let html = `<!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -59,13 +54,53 @@ function generatePage() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Иконки для Clash — RAW + CDN</title>
     <style>
+        /* ===== ПЕРЕМЕННЫЕ ДЛЯ ТЕМ ===== */
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #161b22;
+            --bg-input: #161b22;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-muted: #484f58;
+            --border-color: #30363d;
+            --border-hover: #58a6ff;
+            --badge-bg: #238636;
+            --badge-text: #fff;
+            --shadow: rgba(0,0,0,0.5);
+            --toast-bg: #161b22;
+            --img-bg: #0d1117;
+            --error-color: #f85149;
+            --clash-accent: #7c5cfc;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f6f8fa;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-input: #ffffff;
+            --text-primary: #24292f;
+            --text-secondary: #57606a;
+            --text-muted: #8b949e;
+            --border-color: #d0d7de;
+            --border-hover: #0969da;
+            --badge-bg: #2da44e;
+            --badge-text: #ffffff;
+            --shadow: rgba(0,0,0,0.15);
+            --toast-bg: #ffffff;
+            --img-bg: #f6f8fa;
+            --error-color: #cf222e;
+            --clash-accent: #6e4bda;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: system-ui, -apple-system, sans-serif;
-            background: #0d1117;
-            color: #c9d1d9;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             padding: 2rem;
             min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
         }
         .header {
             display: flex;
@@ -77,32 +112,49 @@ function generatePage() {
             gap: 1rem;
         }
         h1 { font-size: 1.8rem; display: flex; align-items: center; gap: 0.5rem; }
-        h1 small { font-size: 0.9rem; font-weight: 400; color: #8b949e; background: #161b22; padding: 0.2rem 0.8rem; border-radius: 20px; border: 1px solid #30363d; }
+        h1 small { font-size: 0.9rem; font-weight: 400; color: var(--text-secondary); background: var(--bg-secondary); padding: 0.2rem 0.8rem; border-radius: 20px; border: 1px solid var(--border-color); }
         .header-controls { display: flex; align-items: center; gap: 1rem; }
+        
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+        .theme-toggle:hover { border-color: var(--border-hover); transform: scale(1.02); }
+        
         .search-box input {
             padding: 0.6rem 1rem;
             border-radius: 8px;
-            border: 1px solid #30363d;
-            background: #161b22;
-            color: #c9d1d9;
+            border: 1px solid var(--border-color);
+            background: var(--bg-input);
+            color: var(--text-primary);
             font-size: 0.95rem;
             outline: none;
             width: 250px;
             transition: border-color 0.3s;
         }
-        .search-box input:focus { border-color: #58a6ff; }
-        .search-box input::placeholder { color: #484f58; }
+        .search-box input:focus { border-color: var(--border-hover); }
+        .search-box input::placeholder { color: var(--text-muted); }
         
         .stats {
             text-align: center;
             margin-bottom: 1.5rem;
-            color: #8b949e;
+            color: var(--text-secondary);
         }
         .stats span {
-            background: #161b22;
+            background: var(--bg-secondary);
             padding: 0.3rem 1rem;
             border-radius: 20px;
-            border: 1px solid #30363d;
+            border: 1px solid var(--border-color);
         }
         
         .gallery {
@@ -113,31 +165,31 @@ function generatePage() {
             margin: 0 auto;
         }
         .icon-card {
-            background: #161b22;
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 1.5rem 1rem;
             text-align: center;
-            border: 1px solid #30363d;
+            border: 1px solid var(--border-color);
             transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
             cursor: pointer;
         }
         .icon-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-            border-color: #7c5cfc;
+            box-shadow: 0 8px 24px var(--shadow);
+            border-color: var(--clash-accent);
         }
         .icon-card img {
             width: 100%;
             max-height: 140px;
             object-fit: contain;
-            background: #0d1117;
+            background: var(--img-bg);
             border-radius: 8px;
             padding: 8px;
         }
         .icon-card .name {
             margin-top: 0.75rem;
             font-size: 0.9rem;
-            color: #8b949e;
+            color: var(--text-secondary);
             word-break: break-all;
             font-weight: 500;
         }
@@ -158,17 +210,17 @@ function generatePage() {
             transition: opacity 0.2s, transform 0.1s;
         }
         .link-btn:hover { opacity: 0.85; transform: scale(0.97); }
-        .link-btn.raw { background: #238636; color: #fff; }
-        .link-btn.cdn { background: #7c5cfc; color: #fff; }
+        .link-btn.raw { background: var(--badge-bg); color: #fff; }
+        .link-btn.cdn { background: var(--clash-accent); color: #fff; }
         .badge-type {
             display: inline-block;
             margin-top: 0.3rem;
             font-size: 0.6rem;
-            color: #484f58;
-            background: #161b22;
+            color: var(--text-muted);
+            background: var(--bg-secondary);
             padding: 0.1rem 0.6rem;
             border-radius: 12px;
-            border: 1px solid #30363d;
+            border: 1px solid var(--border-color);
         }
         
         .toast {
@@ -176,30 +228,30 @@ function generatePage() {
             bottom: 2rem;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: #161b22;
-            border: 1px solid #30363d;
+            background: var(--toast-bg);
+            border: 1px solid var(--border-color);
             padding: 0.8rem 1.5rem;
             border-radius: 8px;
             opacity: 0;
             transition: all 0.4s ease;
             pointer-events: none;
             z-index: 1000;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 8px 30px var(--shadow);
             max-width: 90%;
         }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-        .toast.success { border-color: #238636; }
-        .toast.error { border-color: #f85149; }
+        .toast.success { border-color: var(--badge-bg); }
+        .toast.error { border-color: var(--error-color); }
         
         .footer-note {
             text-align: center;
             margin-top: 2.5rem;
             font-size: 0.85rem;
-            color: #484f58;
-            border-top: 1px solid #30363d;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
             padding-top: 1.5rem;
         }
-        .footer-note .clash-tip { color: #7c5cfc; font-weight: 500; }
+        .footer-note .clash-tip { color: var(--clash-accent); font-weight: 500; }
         
         @media (max-width: 600px) {
             body { padding: 1rem; }
@@ -212,9 +264,9 @@ function generatePage() {
         }
         
         ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #0d1117; }
-        ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #484f58; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
     </style>
 </head>
 <body>
@@ -225,6 +277,10 @@ function generatePage() {
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="🔍 Поиск..." oninput="filterIcons()">
             </div>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+                <span class="icon" id="themeIcon">🌙</span>
+                <span id="themeLabel">Тёмная</span>
+            </button>
         </div>
     </div>
 
@@ -234,7 +290,6 @@ function generatePage() {
 
     <div class="gallery" id="gallery">`;
 
-    // Добавляем каждую иконку
     icons.forEach(icon => {
         html += `
         <div class="icon-card">
@@ -260,7 +315,42 @@ function generatePage() {
 
     <script>
         // ============================================================
-        // ФУНКЦИИ ДЛЯ РАБОТЫ С ГАЛЕРЕЕЙ
+        // ТЕМА
+        // ============================================================
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? '' : 'light';
+            html.setAttribute('data-theme', next);
+
+            const icon = document.getElementById('themeIcon');
+            const label = document.getElementById('themeLabel');
+            if (next === 'light') {
+                icon.textContent = '☀️';
+                label.textContent = 'Светлая';
+                localStorage.setItem('theme', 'light');
+            } else {
+                icon.textContent = '🌙';
+                label.textContent = 'Тёмная';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        function loadTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.getElementById('themeIcon').textContent = '☀️';
+                document.getElementById('themeLabel').textContent = 'Светлая';
+            } else {
+                document.documentElement.setAttribute('data-theme', '');
+                document.getElementById('themeIcon').textContent = '🌙';
+                document.getElementById('themeLabel').textContent = 'Тёмная';
+            }
+        }
+
+        // ============================================================
+        // ГАЛЕРЕЯ
         // ============================================================
         const gallery = document.getElementById('gallery');
         const toast = document.getElementById('toast');
@@ -330,6 +420,7 @@ function generatePage() {
             });
         });
         
+        loadTheme();
         console.log('✅ Иконки загружены! Всего:', allIcons.length);
     </script>
 </body>
