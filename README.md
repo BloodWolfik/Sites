@@ -1,4 +1,4 @@
-# Сайты
+# Сайты + Иконки
 
 Список сайтов для rule-providers [clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev)
 
