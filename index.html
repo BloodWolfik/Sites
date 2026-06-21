@@ -440,12 +440,8 @@
         const searchInput = document.getElementById('searchInput');
         const countDisplay = document.getElementById('countDisplay');
         
-        // Все иконки уже вшиты в HTML, но нам нужен массив для поиска
         const allIcons = [{"name":"18+v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/18+v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/18+v1.svg"},{"name":"18+v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/18+v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/18+v2.svg"},{"name":"ai_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/ai_v1.svg"},{"name":"ai_v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/ai_v2.svg"},{"name":"ai_v3","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v3.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/ai_v3.svg"},{"name":"ai_v4","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/ai_v4.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/ai_v4.svg"},{"name":"akamai_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/akamai_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/akamai_v1.svg"},{"name":"amazon_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/amazon_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/amazon_v1.svg"},{"name":"amazon_v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/amazon_v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/amazon_v2.svg"},{"name":"cloudflare_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/cloudflare_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/cloudflare_v1.svg"},{"name":"cloudflare_v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/cloudflare_v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/cloudflare_v2.svg"},{"name":"discord_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/discord_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/discord_v1.svg"},{"name":"discord_v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/discord_v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/discord_v2.svg"},{"name":"fastly_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/fastly_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/fastly_v1.svg"},{"name":"lock_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/lock_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/lock_v1.svg"},{"name":"lock_v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/lock_v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/lock_v2.svg"},{"name":"lock_v3","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/lock_v3.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/lock_v3.svg"},{"name":"telegram_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/telegram_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/telegram_v1.svg"},{"name":"torrent_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/torrent_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/torrent_v1.svg"},{"name":"torrent_v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/torrent_v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/torrent_v2.svg"},{"name":"torrent_v3","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/torrent_v3.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/torrent_v3.svg"},{"name":"twitch_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/twitch_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/twitch_v1.svg"},{"name":"website_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/website_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/website_v1.svg"},{"name":"youtube_v1","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v1.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/youtube_v1.svg"},{"name":"youtube_v2","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v2.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/youtube_v2.svg"},{"name":"youtube_v3","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v3.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/youtube_v3.svg"},{"name":"youtube_v4","raw":"https://raw.githubusercontent.com/BloodWolfik/Sites/main/icons/youtube_v4.svg","cdn":"https://cdn.jsdelivr.net/gh/BloodWolfik/Sites@main/icons/youtube_v4.svg"}];
         
-        // ============================================================
-        // ПОИСК
-        // ============================================================
         function filterIcons() {
             const query = searchInput.value.toLowerCase().trim();
             const cards = gallery.querySelectorAll('.icon-card');
@@ -458,12 +454,9 @@
                 if (match) visibleCount++;
             });
             
-            countDisplay.textContent = visibleCount;
+            countDisplay.textContent = visibleCount || allIcons.length;
         }
         
-        // ============================================================
-        // КОПИРОВАНИЕ
-        // ============================================================
         function copyToClipboard(text, label) {
             navigator.clipboard.writeText(text).then(() => {
                 showToast(`✅ ${label} — скопировано!`, 'success');
@@ -482,9 +475,6 @@
             });
         }
         
-        // ============================================================
-        // TOAST
-        // ============================================================
         let toastTimeout;
         function showToast(message, type = 'success') {
             toast.textContent = message;
@@ -494,9 +484,6 @@
             toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500);
         }
         
-        // ============================================================
-        // ОБРАБОТЧИКИ КНОПОК
-        // ============================================================
         document.querySelectorAll('.link-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -507,7 +494,6 @@
             });
         });
         
-        // Клик по карточке — копируем RAW
         document.querySelectorAll('.icon-card').forEach(card => {
             card.addEventListener('click', function() {
                 const rawBtn = this.querySelector('.link-btn.raw');
