@@ -1,0 +1,10 @@
+{
+  "name": "clash-icons",
+  "version": "1.0.0",
+  "description": "Автоматическая генерация страницы с иконками для Clash",
+  "scripts": {
+    "build": "node generate.js"
+  },
+  "author": "BloodWolfik",
+  "license": "MIT"
+}
